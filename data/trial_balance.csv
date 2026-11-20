@@ -1,0 +1,10 @@
+account_code,account_name,debit_inr,credit_inr
+1010,Synthetic Operating Bank,56788855,239477538
+4000,Synthetic Operating Revenue,0,56788854
+5000,Synthetic Materials Expense,34015927,0
+5100,Synthetic Professional Services Expense,36201429,0
+5200,Synthetic Travel Expense,32379935,0
+5300,Synthetic Software Expense,35237097,0
+5400,Synthetic Facilities Expense,34042077,0
+5500,Synthetic Marketing Expense,33878483,0
+5600,Synthetic Logistics Expense,33722590,0
