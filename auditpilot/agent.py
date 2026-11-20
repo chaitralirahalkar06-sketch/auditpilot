@@ -7,11 +7,15 @@ load_dotenv(Path(__file__).with_name('.env'))
 
 from google.adk.agents.base_agent import BaseAgent
 from google.adk.agents.invocation_context import InvocationContext
+from google.adk.agents.parallel_agent import ParallelAgent
 from google.adk.events.event import Event
 
+from .agents.anomaly import anomaly_agent
 from .agents.intake import LOAD_STATUS_KEY
 from .agents.intake import TRIAL_BALANCE_STATUS_KEY
 from .agents.intake import intake_agent
+from .agents.ratio import ratio_agent
+from .agents.vendor import vendor_agent
 
 
 class AuditLeadAgent(BaseAgent):
@@ -42,10 +46,16 @@ class AuditLeadAgent(BaseAgent):
         )
 
 
+specialists = ParallelAgent(
+    name="specialists",
+    description="Runs the anomaly, vendor, and ratio specialists in parallel.",
+    sub_agents=[anomaly_agent, vendor_agent, ratio_agent],
+)
+
 audit_lead = AuditLeadAgent(
     name="audit_lead",
     description="Runs intake validation before downstream audit agents.",
-    sub_agents=[intake_agent],
+    sub_agents=[intake_agent, specialists],
 )
 
 root_agent = audit_lead
