@@ -2,6 +2,7 @@
 
 from .anomaly import anomaly_agent
 from .intake import intake_agent
+from .policy import policy_agent
 from .ratio import ratio_agent
 from .vendor import vendor_agent
 
@@ -10,4 +11,5 @@ __all__ = [
     "anomaly_agent",
     "vendor_agent",
     "ratio_agent",
+    "policy_agent",
 ]

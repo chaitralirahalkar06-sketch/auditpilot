@@ -14,6 +14,7 @@ from .agents.anomaly import anomaly_agent
 from .agents.intake import LOAD_STATUS_KEY
 from .agents.intake import TRIAL_BALANCE_STATUS_KEY
 from .agents.intake import intake_agent
+from .agents.policy import policy_agent
 from .agents.ratio import ratio_agent
 from .agents.vendor import vendor_agent
 
@@ -48,8 +49,10 @@ class AuditLeadAgent(BaseAgent):
 
 specialists = ParallelAgent(
     name="specialists",
-    description="Runs the anomaly, vendor, and ratio specialists in parallel.",
-    sub_agents=[anomaly_agent, vendor_agent, ratio_agent],
+    description=(
+        "Runs the anomaly, vendor, ratio, and policy specialists in parallel."
+    ),
+    sub_agents=[anomaly_agent, vendor_agent, ratio_agent, policy_agent],
 )
 
 audit_lead = AuditLeadAgent(

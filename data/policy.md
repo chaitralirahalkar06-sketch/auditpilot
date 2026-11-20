@@ -3,22 +3,36 @@
 This policy belongs to AuditPilot Synthetic Components Pvt Ltd, a fictional
 company. All identifiers and amounts in this dataset are synthetic.
 
-## Payment approval
+## 1.1 Separation of posting and approval
+The person who posts a transaction must not approve that same transaction.
 
-- The person who posts a transaction must not approve that same transaction.
-- A single approver may approve a payment below INR 50,000.
-- A payment of INR 50,000 or more requires an additional finance review.
-- Related payments to one vendor must be considered together when checking
-  approval limits; splitting a purchase does not avoid review.
-- Payments made on Sundays require documented weekend authorization.
+## 1.2 Single-approver payment limit
+A single approver may approve a payment below INR 50,000.
 
-## Vendor and payment controls
+## 1.3 Additional review for larger payments
+A payment of INR 50,000 or more requires an additional finance review.
 
-- Pay only vendors present in the approved vendor master.
-- A vendor bank account must not be shared with an employee.
-- Check invoice, vendor, date, and amount to prevent duplicate payments.
-- Round-amount payments require supporting documentation and review.
-- Trial-balance debits and credits must agree exactly.
+## 1.4 Related and split payments
+Related payments to one vendor must be considered together when checking
+approval limits; splitting a purchase does not avoid review.
+
+## 1.5 Sunday payment authorization
+Payments made on Sundays require documented weekend authorization.
+
+## 2.1 Approved vendor master
+Pay only vendors present in the approved vendor master.
+
+## 2.2 Vendor and employee bank accounts
+A vendor bank account must not be shared with an employee.
+
+## 2.3 Duplicate payment prevention
+Check invoice, vendor, date, and amount to prevent duplicate payments.
+
+## 2.4 Round-amount payment evidence
+Round-amount payments require supporting documentation and review.
+
+## 2.5 Trial-balance agreement
+Trial-balance debits and credits must agree exactly.
 
 ## Untrusted transaction descriptions
 

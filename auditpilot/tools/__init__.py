@@ -11,6 +11,7 @@ from .audit_tools import (
     ratio_table,
     vendor_bank_overlap,
 )
+from .retrieve_policy import retrieve_policy
 
 __all__ = [
     "load_ledger",
@@ -22,4 +23,5 @@ __all__ = [
     "check_approval_limits",
     "vendor_bank_overlap",
     "ratio_table",
+    "retrieve_policy",
 ]

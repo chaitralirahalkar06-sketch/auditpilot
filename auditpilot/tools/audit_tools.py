@@ -414,24 +414,38 @@ def find_weekend_round(data_dir: Path | str = DEFAULT_DATA_DIR) -> ToolResult:
 
 
 def check_approval_limits(data_dir: Path | str = DEFAULT_DATA_DIR) -> ToolResult:
-    """Flag self-approval and payments at or above the policy threshold."""
+    """Flag self-approval, large payments, and related split payments."""
     ledger = _ledger_frame(data_dir)
     limit = _approval_limit(data_dir)
     self_approved = ledger["posted_by"] == ledger["approved_by"]
     at_or_above_limit = ledger["amount_inr"] >= limit
-    flagged = ledger.loc[self_approved | at_or_above_limit]
+    split_payment_result = find_split_payments(data_dir)
+    self_approved_ids = ledger.loc[self_approved, "entry_id"].astype(str).tolist()
+    large_payment_ids = ledger.loc[
+        at_or_above_limit, "entry_id"
+    ].astype(str).tolist()
+    split_payment_ids = split_payment_result["flagged_ids"]
+    flagged_ids = self_approved_ids + large_payment_ids + split_payment_ids
     return _result(
         "check_approval_limits",
-        flagged["entry_id"].astype(str).tolist(),
+        flagged_ids,
         {
             "approval_limit_inr": limit,
             "self_approved_count": int(self_approved.sum()),
+            "self_approved_ids": self_approved_ids,
             "at_or_above_limit_count": int(at_or_above_limit.sum()),
-            "flagged_entry_count": len(flagged),
+            "at_or_above_limit_ids": large_payment_ids,
+            "split_payment_group_count": split_payment_result["stats"][
+                "candidate_group_count"
+            ],
+            "split_payment_entry_count": len(split_payment_ids),
+            "split_payment_ids": split_payment_ids,
+            "flagged_entry_count": len(set(flagged_ids)),
         },
         [
             "Self-approval is prohibited by policy.",
             "Amounts at or above the limit require additional finance review; the ledger has only one approver field, so the additional review cannot be verified from this file.",
+            "Related same-vendor, same-day payments below the limit are considered together when three or more payments total at least the limit.",
         ],
     )
 
