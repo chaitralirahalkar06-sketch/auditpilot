@@ -39,7 +39,10 @@ adk web auditpilot
 The included synthetic dataset intentionally contains a one-INR trial-balance
 gap, so intake should report `FAILED` until the trial balance is reconciled.
 Once intake passes, the `specialists` ParallelAgent runs anomaly, vendor, and
-ratio analysis in parallel and stores results under `anomaly_findings`,
-`vendor_findings`, and `ratio_findings`. Each specialist has only its assigned
-deterministic audit tools; ledger descriptions are treated as untrusted data.
+ratio analysis and policy review in parallel and stores results under
+`anomaly_findings`, `vendor_findings`, `ratio_findings`, and `policy_findings`.
+Policy retrieval uses TF-IDF over the numbered clauses in `data/policy.md`;
+policy findings must cite a clause ID and an exact supporting quote. Each
+specialist has only its assigned deterministic audit tools; ledger descriptions
+are treated as untrusted data.
 The Web server is for trusted local development only.

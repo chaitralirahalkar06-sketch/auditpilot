@@ -11,7 +11,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 from .audit_tools import DEFAULT_DATA_DIR
 
-_HEADING = re.compile(r"^#{1,6}\s+(?:(\d+(?:\.\d+)*)\s+)?(.+?)\s*$")
+_HEADING = re.compile(
+    r"^#{1,6}\s+(?:(\d+(?:\.\d+)*)\s+)?(.+?)\s*$",
+    flags=re.MULTILINE,
+)
 _CLAUSE_ID = re.compile(r"^\d+(?:\.\d+)*$")
 _MAX_QUOTE_LENGTH = 240
 
