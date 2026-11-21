@@ -5,6 +5,8 @@ from .intake import intake_agent
 from .policy import policy_agent
 from .ratio import ratio_agent
 from .risk import risk_agent
+from .skeptic import skeptic_agent
+from .skeptic import verification_loop
 from .vendor import vendor_agent
 
 __all__ = [
@@ -14,4 +16,6 @@ __all__ = [
     "ratio_agent",
     "policy_agent",
     "risk_agent",
+    "skeptic_agent",
+    "verification_loop",
 ]

@@ -284,6 +284,7 @@ def test_production_specialists_are_parallel_and_ordered_after_intake() -> None:
         "intake_agent",
         "specialists",
         "risk_agent",
+        "verification_loop",
     ]
     assert isinstance(anomaly_agent, LlmAgent)
     assert isinstance(vendor_agent, LlmAgent)

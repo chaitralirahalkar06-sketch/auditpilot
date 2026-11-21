@@ -294,6 +294,7 @@ def test_risk_agent_uses_schema_and_runs_after_specialists() -> None:
         "intake_agent",
         "specialists",
         "risk_agent",
+        "verification_loop",
     ]
     assert set(INPUT_KEYS) == {
         "anomaly_findings",

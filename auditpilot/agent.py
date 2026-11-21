@@ -17,6 +17,7 @@ from .agents.intake import intake_agent
 from .agents.policy import policy_agent
 from .agents.ratio import ratio_agent
 from .agents.risk import risk_agent
+from .agents.skeptic import verification_loop
 from .agents.vendor import vendor_agent
 
 
@@ -58,8 +59,11 @@ specialists = ParallelAgent(
 
 audit_lead = AuditLeadAgent(
     name="audit_lead",
-    description="Runs intake validation, specialists, then deterministic risk scoring.",
-    sub_agents=[intake_agent, specialists, risk_agent],
+    description=(
+        "Runs intake validation, specialists, risk scoring, and skeptical "
+        "verification."
+    ),
+    sub_agents=[intake_agent, specialists, risk_agent, verification_loop],
 )
 
 root_agent = audit_lead

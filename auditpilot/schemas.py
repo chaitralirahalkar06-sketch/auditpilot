@@ -61,3 +61,48 @@ class RankedFindings(BaseModel):
         if scores != sorted(scores, reverse=True):
             raise ValueError("findings must be sorted by descending risk score")
         return self
+
+
+class VerificationChecks(BaseModel):
+    """Deterministic checks performed for a risk finding."""
+
+    entry_ids_exist: bool
+    evidence_supports_claim: bool
+    innocent_explanation_plausible: bool
+    unsupported_financial_claims: list[str] = Field(default_factory=list)
+
+
+class VerificationFinding(BaseModel):
+    """A risk finding with a skeptical status and an auditable reason."""
+
+    id: str
+    finding: dict[str, object]
+    entry_ids: list[str] = Field(default_factory=list)
+    status: Literal["confirmed", "needs_evidence", "dropped"]
+    reason: str = Field(min_length=1)
+    checks: VerificationChecks
+
+    @field_validator("reason")
+    @classmethod
+    def require_single_line_reason(cls, value: str) -> str:
+        if "\n" in value or "\r" in value:
+            raise ValueError("verification reason must be one line")
+        return value
+
+
+class VerificationReport(BaseModel):
+    """Verification results with dropped findings retained in an appendix."""
+
+    iteration: Annotated[int, Field(strict=True, ge=1, le=3)]
+    findings: list[VerificationFinding]
+    dropped_appendix: list[VerificationFinding] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def partition_dropped_findings(self) -> VerificationReport:
+        if any(finding.status == "dropped" for finding in self.findings):
+            raise ValueError("dropped findings must be kept in dropped_appendix")
+        if any(
+            finding.status != "dropped" for finding in self.dropped_appendix
+        ):
+            raise ValueError("dropped_appendix may contain only dropped findings")
+        return self

@@ -57,4 +57,14 @@ INR 10,000–49,999 (2), INR 50,000–99,999 (3), INR 100,000–499,999 (4), and
 INR 500,000 or more (5). The score is likelihood multiplied by impact.
 Aggregate-only ratio findings without entry IDs are excluded with an explicit
 reason rather than assigned invented transaction identifiers.
+
+## Skeptical verification
+
+After risk scoring, the `verification_loop` checks each finding against the
+ledger and the applicable deterministic audit checks. Missing IDs and
+unsupported financial claims are retained in `dropped_appendix`; supported
+indicators that still have plausible innocent explanations remain
+`needs_evidence`. The loop stops when no findings need more evidence or after
+three rounds. There is not yet a `report_agent`; reporting can be added after
+the verification loop in a later phase.
 The Web server is for trusted local development only.
