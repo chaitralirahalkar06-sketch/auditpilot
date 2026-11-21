@@ -16,6 +16,7 @@ from .agents.intake import TRIAL_BALANCE_STATUS_KEY
 from .agents.intake import intake_agent
 from .agents.policy import policy_agent
 from .agents.ratio import ratio_agent
+from .agents.risk import risk_agent
 from .agents.vendor import vendor_agent
 
 
@@ -57,8 +58,8 @@ specialists = ParallelAgent(
 
 audit_lead = AuditLeadAgent(
     name="audit_lead",
-    description="Runs intake validation before downstream audit agents.",
-    sub_agents=[intake_agent, specialists],
+    description="Runs intake validation, specialists, then deterministic risk scoring.",
+    sub_agents=[intake_agent, specialists, risk_agent],
 )
 
 root_agent = audit_lead

@@ -45,4 +45,16 @@ Policy retrieval uses TF-IDF over the numbered clauses in `data/policy.md`;
 policy findings must cite a clause ID and an exact supporting quote. Each
 specialist has only its assigned deterministic audit tools; ledger descriptions
 are treated as untrusted data.
+
+## Risk ranking
+
+After the specialists finish, `risk_agent` deterministically ranks findings
+using the evidence and transaction amounts in the ledger. Likelihood is 5 for
+direct prohibited-control evidence, 4 for strong transaction patterns, 3 for
+review triggers that do not establish failure, and 2 for population screening.
+Impact is based on total listed transaction exposure: below INR 10,000 (1),
+INR 10,000–49,999 (2), INR 50,000–99,999 (3), INR 100,000–499,999 (4), and
+INR 500,000 or more (5). The score is likelihood multiplied by impact.
+Aggregate-only ratio findings without entry IDs are excluded with an explicit
+reason rather than assigned invented transaction identifiers.
 The Web server is for trusted local development only.

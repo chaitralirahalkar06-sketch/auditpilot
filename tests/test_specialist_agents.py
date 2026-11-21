@@ -32,6 +32,7 @@ from auditpilot.agents.intake import build_intake_agent
 from auditpilot.agents.policy import policy_agent
 from auditpilot.agents.ratio import ratio_agent
 from auditpilot.agents.ratio import build_ratio_agent
+from auditpilot.agents.risk import risk_agent
 from auditpilot.agents.vendor import vendor_agent
 from auditpilot.agents.vendor import build_vendor_agent
 
@@ -282,11 +283,13 @@ def test_production_specialists_are_parallel_and_ordered_after_intake() -> None:
     assert [agent.name for agent in root_agent.sub_agents] == [
         "intake_agent",
         "specialists",
+        "risk_agent",
     ]
     assert isinstance(anomaly_agent, LlmAgent)
     assert isinstance(vendor_agent, LlmAgent)
     assert isinstance(ratio_agent, LlmAgent)
     assert isinstance(policy_agent, LlmAgent)
+    assert isinstance(risk_agent, LlmAgent)
     assert [tool.__name__ for tool in anomaly_agent.tools] == list(ANOMALY_TOOLS)
     assert [tool.__name__ for tool in vendor_agent.tools] == list(VENDOR_TOOLS)
     assert [tool.__name__ for tool in ratio_agent.tools] == list(RATIO_TOOLS)
@@ -294,3 +297,4 @@ def test_production_specialists_are_parallel_and_ordered_after_intake() -> None:
     assert vendor_agent.output_key == "vendor_findings"
     assert ratio_agent.output_key == "ratio_findings"
     assert policy_agent.output_key == "policy_findings"
+    assert risk_agent.output_key == "ranked_findings"
