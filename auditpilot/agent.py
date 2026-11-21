@@ -10,6 +10,7 @@ from google.adk.agents.invocation_context import InvocationContext
 from google.adk.agents.parallel_agent import ParallelAgent
 from google.adk.events.event import Event
 
+from .callbacks import install_audit_callbacks
 from .agents.anomaly import anomaly_agent
 from .agents.intake import LOAD_STATUS_KEY
 from .agents.intake import TRIAL_BALANCE_STATUS_KEY
@@ -96,3 +97,4 @@ audit_lead = AuditLeadAgent(
 )
 
 root_agent = audit_lead
+install_audit_callbacks(root_agent)

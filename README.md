@@ -75,3 +75,25 @@ only session-state tool outputs. In the same ADK session, reply exactly
 FINAL; the other choices keep it DRAFT. Sign-off choices are checked against
 the current human message, not inferred from the model's response.
 The Web server is for trusted local development only.
+
+## Phase 9 guardrails and evaluation
+
+The production ADK tree masks known vendor/employee bank-account values in
+model-facing request content while leaving deterministic tool inputs unchanged.
+Model and tool callbacks append hash-only activity records to the ignored
+`audit_trail.jsonl`; raw prompts, results, API credentials, and financial
+argument values are not written to that file.
+
+Run the deterministic evaluation from the project root:
+
+```sh
+python -m evals.run_eval
+```
+
+It executes the audit tools three times, then reads `data/ground_truth.csv`
+inside the evaluator only and writes per-type precision/recall to
+`evals/results.md`. The planted trial-balance gap intentionally blocks normal
+intake, and no audit memo is included in a fresh checkout; until a memo exists,
+the evaluation reports its amount-consistency check as `SKIPPED` rather than
+creating or altering a memo. Existing specialist tests verify that all four
+planted prompt-injection descriptions do not alter the deterministic findings.

@@ -16,5 +16,8 @@ venv/
 .idea/
 .vscode/
 
+# Runtime audit output may contain sensitive operational metadata.
+audit_trail.jsonl
+
 # System files
 .DS_Store
