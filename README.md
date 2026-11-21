@@ -99,40 +99,4 @@ creating or altering a memo. Existing specialist tests verify that all four
 planted prompt-injection descriptions do not alter the deterministic findings.
 
 How System Work
-             Financial CSV Files
-                    |
-                    v
-             AUDIT LEAD AGENT
-                    |
-                    v
-              INTAKE AGENT
-           Validate financial data
-                    |
-                    v
-          SPECIALIST AGENTS (Parallel)
-          /          |           \
-         v           v            v
-     Anomaly       Vendor        Ratio
-      Agent        Agent         Agent
-         \           |            /
-          \          |           /
-           v         v          v
-              POLICY AGENT
-                    |
-                    v
-                RISK AGENT
-             Calculate risk scores
-                    |
-                    v
-                SKEPTIC AGENT
-             Verify every finding
-                    |
-                    v
-                REPORT AGENT
-              Prepare audit memo
-                    |
-                    v
-             HUMAN APPROVAL
-                    |
-                    v
-              FINAL AUDIT MEMO
+            <img width="1160" height="2264" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/2afd8236-3b4d-48d2-9472-41054b67a8b9" />
