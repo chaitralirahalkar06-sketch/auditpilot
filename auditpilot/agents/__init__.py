@@ -4,6 +4,7 @@ from .anomaly import anomaly_agent
 from .intake import intake_agent
 from .policy import policy_agent
 from .ratio import ratio_agent
+from .report import report_agent
 from .risk import risk_agent
 from .skeptic import skeptic_agent
 from .skeptic import verification_loop
@@ -16,6 +17,7 @@ __all__ = [
     "ratio_agent",
     "policy_agent",
     "risk_agent",
+    "report_agent",
     "skeptic_agent",
     "verification_loop",
 ]

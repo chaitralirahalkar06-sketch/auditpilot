@@ -65,6 +65,13 @@ ledger and the applicable deterministic audit checks. Missing IDs and
 unsupported financial claims are retained in `dropped_appendix`; supported
 indicators that still have plausible innocent explanations remain
 `needs_evidence`. The loop stops when no findings need more evidence or after
-three rounds. There is not yet a `report_agent`; reporting can be added after
-the verification loop in a later phase.
+three rounds.
+
+## Audit memo and human sign-off
+
+After verification, `report_agent` writes `docs/audit_memo.md` as DRAFT using
+only session-state tool outputs. In the same ADK session, reply exactly
+`APPROVE`, `REQUEST CHANGES`, or `REJECT`. Only `APPROVE` changes the memo to
+FINAL; the other choices keep it DRAFT. Sign-off choices are checked against
+the current human message, not inferred from the model's response.
 The Web server is for trusted local development only.

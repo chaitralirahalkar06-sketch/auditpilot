@@ -290,6 +290,7 @@ def test_production_loop_follows_risk_and_has_three_iteration_cap() -> None:
         "specialists",
         "risk_agent",
         "verification_loop",
+        "report_agent",
     ]
     assert isinstance(verification_loop.sub_agents[0], LlmAgent)
     assert verification_loop.sub_agents[0].name == "skeptic_agent"
