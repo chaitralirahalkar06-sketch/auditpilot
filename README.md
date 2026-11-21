@@ -221,3 +221,25 @@ repository and images, the Secrets Manager secret, the `auditpilot` CloudWatch
 log group, both security groups, both instance profiles, inline and attached
 IAM policies, and both IAM roles. Check the EC2 volumes/snapshots and AWS
 Billing console afterward to confirm no billable resources remain.
+
+## Class presentation
+
+The combined Part 1 + Part 2 class presentation is available as a PDF and as an
+editable PowerPoint:
+
+- [AuditPilot presentation PDF](docs/auditpilot_part1_part2.pdf)
+- [Editable PowerPoint source](docs/auditpilot_part1_part2.pptx)
+
+To change the slides, open the PowerPoint in Microsoft PowerPoint or LibreOffice
+Impress. To regenerate the original deck from the project, install the optional
+presentation dependency and run:
+
+```sh
+python -m pip install -r requirements-presentation.txt
+python scripts/build_presentation.py
+libreoffice --headless --convert-to pdf --outdir docs \
+  docs/auditpilot_part1_part2.pptx
+```
+
+The deck explains the purpose of each project part, the audit and deployment
+diagrams, key files, safe ways to make changes, and known limitations.
