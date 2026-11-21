@@ -6,6 +6,7 @@ import copy
 import csv
 import hashlib
 import json
+import os
 import re
 import threading
 from collections.abc import Mapping
@@ -23,7 +24,12 @@ from google.adk.tools.base_tool import BaseTool
 from google.genai import types
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
-AUDIT_TRAIL_PATH = Path(__file__).resolve().parents[1] / "audit_trail.jsonl"
+AUDIT_TRAIL_PATH = Path(
+    os.environ.get(
+        "AUDIT_TRAIL_PATH",
+        str(Path(__file__).resolve().parents[1] / "audit_trail.jsonl"),
+    )
+)
 
 _AUDIT_LOCK = threading.Lock()
 _ACCOUNT_NUMBER_PATTERN = re.compile(r"(?<!\d)(?:\d[ ]?){8,18}(?!\d)")

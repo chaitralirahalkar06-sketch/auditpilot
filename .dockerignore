@@ -1,0 +1,14 @@
+.git
+.venv
+venv
+.pytest_cache
+**/__pycache__
+*.py[cod]
+**/.env
+**/.env.*
+!.env.example
+.adk
+**/.adk
+audit_trail.jsonl
+data/ground_truth.csv
+docs/audit_memo.md
